@@ -56,51 +56,20 @@ jobs:
 
       - name: Create dbt profiles.yml for Snowflake (for linting context)
         run: |
-
-
-      - name: Get changed model files
-        id: changed-files
+          echo "default:
+            outputs:
+              dev:
+                account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
+                database: dev_ci_testing
+                password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
+                role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
+                schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
+                threads: 8
+                type: snowflake
+                user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
+                warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
+            target: dev" > ~/.dbt/profiles.yml
+      - name: Lint files
+        # if: steps.changed-files.outputs.files != ''
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD | grep '^models/.*\.sql$' || true)
-          echo "files=$CHANGED_FILES" >> $GITHUB_OUTPUT
-        
-
-      - name: Lint only changed files
-        if: steps.changed-files.outputs.files != ''
-        run: |
-          echo "${{ steps.changed-files.outputs.files }}" | xargs sqlfluff lint
-      # --- Failure Handling ---
-      # # Intermediate step to read file content reliably on failure
-      # - name: Read Lint Output File on Failure
-      #   id: read-lint-output
-      #   # Run only if the lint_script step failed
-      #   if: failure() && steps.lint_script.outcome == 'failure'
-      #   run: |
-      #     output_file="SQLFLUFF_LINTER_OUTPUT.TXT" # Matches script variable
-      #     if [ -f "$output_file" ]; then
-      #       # Read the file content, preserving newlines
-      #       content=$(cat "$output_file")
-      #     else
-      #       content="Lint output file ($output_file) not found."
-      #     fi
-      #     content="${content//'%'/'%25'}"
-      #     EOF_MARKER=$(uuidgen)
-      #     echo "content<<${EOF_MARKER}" >> $GITHUB_OUTPUT
-      #     echo "$content" >> $GITHUB_OUTPUT
-      #     echo "${EOF_MARKER}" >> $GITHUB_OUTPUT
-      #   shell: bash
-
-      # - name: Create Comment on PR Failure
-      #   # Run only if lint_script failed and it's a pull request event
-      #   if: failure() && steps.lint_script.outcome == 'failure' && github.event_name == 'pull_request'
-      #   uses: peter-evans/create-or-update-comment@v4
-      #   with:
-      #     issue-number: ${{ github.event.pull_request.number }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     body: |
-      #       ❌ **SQLFluff Linting Failed**
-      #       Issues were found that require manual correction or are unfixable by `sqlfluff fix`.
-      #       Please review the output below (or the full logs), fix the issues locally, and commit the changes.
-      #       ```text
-      #       ${{ steps.read-lint-output.outputs.content }}
-      #      ```
+          sqlfluff lint
