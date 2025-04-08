@@ -1,26 +1,27 @@
 name: lint_changed_models
+
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - sqlfluff-implementation
 
-concurrency:
-  # Group by workflow and ref, cancel ongoing runs for the same PR/branch
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   # Group by workflow and ref, cancel ongoing runs for the same PR/branch
+#   group: lint_changed_models-${{ github.ref }}
+#   cancel-in-progress: true
 
-  env:
-    PYTHON_VERSION: '3.9'
-    #######  Secrets ######
-    #######  Snowflake
-    DBT_TUVA_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_TUVA_SNOWFLAKE_ACCOUNT }}
-    DBT_TUVA_CI_DATABASE: ${{ secrets.DBT_TUVA_CI_DATABASE }}
-    DBT_SNOWFLAKE_CI_PASSWORD: ${{ secrets.DBT_SNOWFLAKE_CI_PASSWORD }}
-    DBT_SNOWFLAKE_CI_ROLE: ${{ secrets.DBT_SNOWFLAKE_CI_ROLE }}
-    DBT_SNOWFLAKE_CI_SCHEMA: ${{ secrets.DBT_SNOWFLAKE_CI_SCHEMA }}
-    DBT_SNOWFLAKE_CI_USER: ${{ secrets.DBT_SNOWFLAKE_CI_USER }}
-    DBT_SNOWFLAKE_CI_WAREHOUSE: ${{ secrets.DBT_SNOWFLAKE_CI_WAREHOUSE }}
+env:
+  PYTHON_VERSION: '3.9'
+  #######  Secrets ######
+  #######  Snowflake
+  DBT_TUVA_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_TUVA_SNOWFLAKE_ACCOUNT }}
+  DBT_TUVA_CI_DATABASE: ${{ secrets.DBT_TUVA_CI_DATABASE }}
+  DBT_SNOWFLAKE_CI_PASSWORD: ${{ secrets.DBT_SNOWFLAKE_CI_PASSWORD }}
+  DBT_SNOWFLAKE_CI_ROLE: ${{ secrets.DBT_SNOWFLAKE_CI_ROLE }}
+  DBT_SNOWFLAKE_CI_SCHEMA: ${{ secrets.DBT_SNOWFLAKE_CI_SCHEMA }}
+  DBT_SNOWFLAKE_CI_USER: ${{ secrets.DBT_SNOWFLAKE_CI_USER }}
+  DBT_SNOWFLAKE_CI_WAREHOUSE: ${{ secrets.DBT_SNOWFLAKE_CI_WAREHOUSE }}
 
 # Permissions needed for the comment action
 permissions:
@@ -51,19 +52,6 @@ jobs:
 
       - name: Create dbt profiles.yml for Snowflake (for linting context)
         run: |
-          echo "default:
-            outputs:
-              dev:
-                account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
-                database: dev_ci_testing
-                password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
-                role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
-                schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
-                threads: 8
-                type: snowflake
-                user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
-                warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
-            target: dev" > ~/.dbt/profiles.yml
 
 
       - name: Get changed model files
@@ -76,7 +64,7 @@ jobs:
       - name: Lint only changed files
         if: steps.changed-files.outputs.files != ''
         run: |
-          echo "${{ steps.changed-files.outputs.files }}" | xargs sqlfluff lint --dialect snowflake --templater dbt
+          echo "${{ steps.changed-files.outputs.files }}" | xargs sqlfluff lint
       # --- Failure Handling ---
       # # Intermediate step to read file content reliably on failure
       # - name: Read Lint Output File on Failure
