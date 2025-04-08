@@ -1,10 +1,10 @@
-name: lint_changed_models
+name: sqlfluff_lint
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
-      - sqlfluff-implementation
+      - main
 
 # concurrency:
 #   # Group by workflow and ref, cancel ongoing runs for the same PR/branch
