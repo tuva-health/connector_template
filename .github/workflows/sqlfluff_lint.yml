@@ -69,6 +69,10 @@ jobs:
                 user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
                 warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
             target: dev" > ~/.dbt/profiles.yml
+
+      - name: Install dbt dependencies
+        run: |
+          dbt deps
       - name: Lint files
         # if: steps.changed-files.outputs.files != ''
         run: |
