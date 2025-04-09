@@ -1,4 +1,4 @@
-select
+select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
       cast(null as {{ dbt.type_string() }} ) as location_id
     , cast(null as {{ dbt.type_string() }} ) as npi
     , cast(null as {{ dbt.type_string() }} ) as name
@@ -13,3 +13,4 @@ select
     , cast(null as {{ dbt.type_string() }} ) as data_source
     , cast(null as {{ dbt.type_string() }} ) as file_name
     , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime
+{% if target.type == 'fabric' %} {% else %} limit 0 {% endif %}

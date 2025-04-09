@@ -1,4 +1,4 @@
-select
+select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
       cast(null as {{ dbt.type_string() }}) as person_id
     , cast(null as {{ dbt.type_string() }}) as year_month
     , cast(null as {{ dbt.type_string() }}) as payer
@@ -12,3 +12,4 @@ select
     , cast(null as {{ dbt.type_string() }}) as custom_attributed_provider_practice
     , cast(null as {{ dbt.type_string() }}) as custom_attributed_provider_organization
     , cast(null as {{ dbt.type_string() }}) as custom_attributed_provider_lob
+{% if target.type == 'fabric' %} {% else %} limit 0 {% endif %}

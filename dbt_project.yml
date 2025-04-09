@@ -5,6 +5,7 @@ version: '1.0.0'
 profile: 'default'
 
 vars:
+  exclude_packages: ["all"]
   ## The Tuva Project vars
   ### Uncomment the line(s) based on the type of source data.
   #claims_enabled: true
@@ -30,3 +31,49 @@ snapshot-paths: ["snapshots"]
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
+
+models:
+  dbt_project_evaluator:
+    marts:
+      dag:
+        fct_model_fanout:
+          +enabled: false
+        fct_root_models:
+          +enabled: false
+      documentation:
+        fct_undocumented_models: #
+          +enabled: false
+        fct_documentation_coverage: #
+          +enabled: false
+        fct_undocumented_sources: #
+          +enabled: false
+        fct_undocumented_source_tables:
+          +enabled: false
+      tests:
+        fct_sources_without_freshness:
+          +enabled: false
+      structure:
+        fct_test_directories: #
+          +enabled: false
+        fct_model_naming_conventions: #
+          +enabled: false
+        fct_source_directories: #
+          +enabled: false
+        fct_model_directories: #
+          +enabled: false
+      performance:
+        fct_chained_views_dependencies: #
+          +enabled: false
+        fct_exposure_parents_materializations: #
+          +enabled: false
+      governance:
+        fct_public_models_without_contract: #
+          +enabled: false
+        fct_exposures_dependent_on_private_models: #
+          +enabled: false
+        fct_undocumented_public_models: #
+          +enabled: false
+
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['dbt_project_evaluator', 'dbt']

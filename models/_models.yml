@@ -13,6 +13,15 @@ models:
       synonym for member). Every claims dataset should include some sort of 
       eligibility data, otherwise it's impossible to calculate member months, 
       which are needed to calculate measures like PMPM.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - person_id
+            - enrollment_start_date
+            - enrollment_end_date
+            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+            - payer
+            - data_source
     columns:
       - name: person_id
         tests:
@@ -78,12 +87,13 @@ models:
 
   - name: medical_claim
     config:
-
       schema: input_layer
       tags: input_layer
       materialized: table
     tests: 
       - unique:
+          column_name: "(claim_id || '-' || claim_line_number)"
+      - not_null:
           column_name: "(claim_id || '-' || claim_line_number)"
     description: > 
       The medical_claim table contains information on healthcare services and 
@@ -711,6 +721,8 @@ models:
     tests: 
       - unique:
           column_name: "(claim_id || '-' || claim_line_number)"
+      - not_null:
+          column_name: "(claim_id || '-' || claim_line_number)"
     columns:
       - name: claim_id
         description: '{{ doc("claim_id") }}'
@@ -822,6 +834,14 @@ models:
       attributed provider (typically determined by the user).
       Fields related to each attributed provider (practice, organization,
       line of business)are also present.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - person_id
+            - year_month
+            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+            - payer
+            - data_source
     columns:
       - name: person_id
         description: '{{ doc("person_id") }}'
@@ -864,6 +884,9 @@ models:
     columns:
       - name: condition_id
         description: '{{ doc("condition_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
@@ -933,6 +956,9 @@ models:
     columns:
       - name: encounter_id
         description: '{{ doc("encounter_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
@@ -1020,6 +1046,9 @@ models:
     columns:
       - name: lab_result_id
         description: '{{ doc("lab_result_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
@@ -1110,6 +1139,9 @@ models:
     columns:
       - name: location_id
         description: '{{ doc("location_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: npi
         description: '{{ doc("npi") }}'
         meta:
@@ -1151,6 +1183,9 @@ models:
     columns:
       - name: medication_id
         description: '{{ doc("medication_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
@@ -1218,6 +1253,9 @@ models:
     columns:
       - name: observation_id
         description: '{{ doc("observation_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
@@ -1277,6 +1315,9 @@ models:
     columns:
       - name: person_id
         description: '{{ doc("person_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: patient_id
         description: '{{ doc("patient_id") }}'
       - name: first_name
@@ -1335,6 +1376,9 @@ models:
     columns:
       - name: practitioner_id
         description: '{{ doc("practitioner_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: npi
         description: '{{ doc("npi") }}'
         meta:
@@ -1369,6 +1413,9 @@ models:
     columns:
       - name: procedure_id
         description: '{{ doc("procedure_id") }}'
+        tests:
+          - unique
+          - not_null
       - name: person_id
         description: '{{ doc("person_id") }}'
       - name: patient_id
