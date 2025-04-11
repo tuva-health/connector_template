@@ -103,7 +103,7 @@ jobs:
       - name: list changed .sql files
         id: list_changed_sql
         run: |
-          echo steps.changed-files.outputs.files
+          echo "${{ steps.changed_sql.outputs.files }}"
       # - name: Lint files
       #   if: steps.changed-files.outputs.files != ''
       #   run: |
