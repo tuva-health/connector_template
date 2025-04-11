@@ -60,39 +60,39 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Set up Python ${{ env.PYTHON_VERSION }}
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: ${{ env.PYTHON_VERSION }}
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
 
-      # - name: Install Dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     # Install dbt adapter needed for compile/lint (using Snowflake here)
-      #     # Also install sqlfluff
-      #     pip install dbt-core==1.8.6 dbt-snowflake sqlfluff==3.3.1 sqlfluff-templater-dbt
-      # --- Setup dbt Profile for Linting ---
-      # - name: Create dbt profiles directory
-      #   run: mkdir -p ~/.dbt
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install dbt adapter needed for compile/lint (using Snowflake here)
+          # Also install sqlfluff
+          pip install dbt-core==1.8.6 dbt-snowflake sqlfluff==3.3.1 sqlfluff-templater-dbt
+      --- Setup dbt Profile for Linting ---
+      - name: Create dbt profiles directory
+        run: mkdir -p ~/.dbt
 
-      # - name: Create dbt profiles.yml for Snowflake (for linting context)
-      #   run: |
-      #     echo "default:
-      #       outputs:
-      #         dev:
-      #           account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
-      #           database: dev_ci_testing
-      #           password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
-      #           role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
-      #           schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
-      #           threads: 8
-      #           type: snowflake
-      #           user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
-      #           warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
-      #       target: dev" > ~/.dbt/profiles.yml
-      # - name: Install dbt dependencies
-      #   run: |
-      #     dbt deps
+      - name: Create dbt profiles.yml for Snowflake (for linting context)
+        run: |
+          echo "default:
+            outputs:
+              dev:
+                account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
+                database: dev_ci_testing
+                password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
+                role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
+                schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
+                threads: 8
+                type: snowflake
+                user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
+                warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
+            target: dev" > ~/.dbt/profiles.yml
+      - name: Install dbt dependencies
+        run: |
+          dbt deps
       - name: Get changed .sql files
         id: changed_sql
         run: |
@@ -104,7 +104,7 @@ jobs:
         id: list_changed_sql
         run: |
           echo "${{ steps.changed_sql.outputs.files }}"
-      # - name: Lint files
-      #   if: steps.changed-files.outputs.files != ''
-      #   run: |
-      #     sqlfluff lint ${{ steps.changed_sql.outputs.files }}
+      - name: Lint files
+        if: ${{ steps.changed_sql.outputs.files != '' }}
+        run: |
+          sqlfluff lint ${{ steps.changed_sql.outputs.files }}
