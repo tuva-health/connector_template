@@ -100,10 +100,6 @@ jobs:
           files=$(git diff --name-only origin/main...HEAD -- 'models/**/*.sql')
           files=$(echo "$files" | tr '\n' ' ')  # convert to space-separated string
           echo "files=$files" >> $GITHUB_OUTPUT
-      - name: list changed .sql files
-        id: list_changed_sql
-        run: |
-          echo "${{ steps.changed_sql.outputs.files }}"
       - name: Lint files
         if: ${{ steps.changed_sql.outputs.files != '' }}
         run: |
