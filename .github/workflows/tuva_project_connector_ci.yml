@@ -58,9 +58,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Fetch all branches
-        run: |
-          git fetch origin main
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v4
         with:
@@ -94,7 +91,14 @@ jobs:
       - name: Install dbt dependencies
         run: |
           dbt deps
-      - name: Lint files
-        # if: steps.changed-files.outputs.files != ''
+      - name: Get changed .sql files
+        id: changed_sql
         run: |
-          sqlfluff lint
+          git fetch origin main
+          files=$(git diff --name-only origin/main...HEAD -- 'models/**/*.sql')
+          files=$(echo "$files" | tr '\n' ' ')  # convert to space-separated string
+          echo "files=$files" >> $GITHUB_OUTPUT
+      - name: Lint files
+        if: steps.changed-files.outputs.files != ''
+        run: |
+          sqlfluff lint ${{ steps.changed_sql.outputs.files }}
