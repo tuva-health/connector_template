@@ -19,39 +19,39 @@ env:
   DBT_SNOWFLAKE_CI_WAREHOUSE: ${{ secrets.DBT_SNOWFLAKE_CI_WAREHOUSE }}
 
 jobs:
-  # dbt-project-evaluator:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #     - name: Set up Python ${{ env.PYTHON_VERSION }}
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: ${{ env.PYTHON_VERSION }}
-  #     - name: Install dbt
-  #       run: pip install dbt-core dbt-snowflake
-  #     - name: Create dbt profiles directory
-  #       run: mkdir -p ~/.dbt
-  #     - name: Create dbt profiles.yml for Snowflake to run package
-  #       run: |
-  #         echo "default:
-  #           outputs:
-  #             dev:
-  #               account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
-  #               database: dev_ci_testing
-  #               password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
-  #               role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
-  #               schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
-  #               threads: 8
-  #               type: snowflake
-  #               user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
-  #               warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
-  #           target: dev" > ~/.dbt/profiles.yml
-  #     - name: Install dependencies
-  #       run: dbt deps
-  #     - name: Run dbt-project-evaluator
-  #       run: |
-  #         dbt build --select package:dbt_project_evaluator
+  dbt-project-evaluator:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install dbt
+        run: pip install dbt-core dbt-snowflake
+      - name: Create dbt profiles directory
+        run: mkdir -p ~/.dbt
+      - name: Create dbt profiles.yml for Snowflake to run package
+        run: |
+          echo "default:
+            outputs:
+              dev:
+                account: \"{{ env_var('DBT_TUVA_SNOWFLAKE_ACCOUNT') }}\"
+                database: dev_ci_testing
+                password: \"{{ env_var('DBT_SNOWFLAKE_CI_PASSWORD') }}\"
+                role: \"{{ env_var('DBT_SNOWFLAKE_CI_ROLE') }}\"
+                schema: \"{{ env_var('DBT_SNOWFLAKE_CI_SCHEMA') }}\"
+                threads: 8
+                type: snowflake
+                user: \"{{ env_var('DBT_SNOWFLAKE_CI_USER') }}\"
+                warehouse: \"{{ env_var('DBT_SNOWFLAKE_CI_WAREHOUSE') }}\"
+            target: dev" > ~/.dbt/profiles.yml
+      - name: Install dependencies
+        run: dbt deps
+      - name: Run dbt-project-evaluator
+        run: |
+          dbt build --select package:dbt_project_evaluator
   sqlfluff-lint:
     runs-on: ubuntu-latest
     steps:
