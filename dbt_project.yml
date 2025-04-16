@@ -40,38 +40,48 @@ models:
           +enabled: false
         fct_root_models:
           +enabled: false
+        fct_direct_join_to_source:
+          +enabled: false
+        fct_marts_or_intermediate_dependent_on_source:
+          +enabled: false
+        fct_multiple_sources_joined:
+          +enabled: false
+        fct_staging_dependent_on_marts_or_intermediate:
+          +enabled: false
+        fct_too_many_joins:
+          +enabled: false
       documentation:
-        fct_undocumented_models: #
+        fct_undocumented_models:
           +enabled: false
-        fct_documentation_coverage: #
+        fct_documentation_coverage:
           +enabled: false
-        fct_undocumented_sources: #
+        fct_undocumented_sources:
           +enabled: false
         fct_undocumented_source_tables:
           +enabled: false
       tests:
         fct_sources_without_freshness:
           +enabled: false
+        fct_test_coverage:
+          +enabled: false
       structure:
-        fct_test_directories: #
+        fct_test_directories:
           +enabled: false
-        fct_model_naming_conventions: #
+        fct_source_directories:
           +enabled: false
-        fct_source_directories: #
-          +enabled: false
-        fct_model_directories: #
+        fct_model_directories:
           +enabled: false
       performance:
-        fct_chained_views_dependencies: #
+        fct_chained_views_dependencies:
           +enabled: false
-        fct_exposure_parents_materializations: #
+        fct_exposure_parents_materializations:
           +enabled: false
       governance:
-        fct_public_models_without_contract: #
+        fct_public_models_without_contract:
           +enabled: false
-        fct_exposures_dependent_on_private_models: #
+        fct_exposures_dependent_on_private_models:
           +enabled: false
-        fct_undocumented_public_models: #
+        fct_undocumented_public_models:
           +enabled: false
 
 dispatch:
