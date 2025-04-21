@@ -1,11 +1,7 @@
 target/
-
-dbt_modules/
 dbt_packages/
 package-lock.yml
 logs/
-
-release_notes/
 
 .idea/
 .vscode/
@@ -18,14 +14,4 @@ __pycache__/
 .envrc
 .python-version
 venv/
-
 macros/
-# ci_testing/
-# helper_scripts/
-# models/data_quality/stage
-# models/data_quality/intermediate
-# models/data_quality/final
-# models/integration_tests
-# models/data_quality/dqi/intermediate
-# models/data_quality/dqi/mart_review
-# models/data_quality/dqi/stage
