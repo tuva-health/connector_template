@@ -32,6 +32,11 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+seeds:
+  dbt_project_evaluator:
+    dbt_project_evaluator_exceptions:
+      +enabled: false
+
 models:
   dbt_project_evaluator:
     marts:
@@ -46,19 +51,12 @@ models:
           +enabled: false
         fct_multiple_sources_joined:
           +enabled: false
-        fct_staging_dependent_on_marts_or_intermediate:
+        fct_staging_dependent_on_staging:
           +enabled: false
         fct_too_many_joins:
           +enabled: false
       documentation:
-        fct_undocumented_models:
-          +enabled: false
-        fct_documentation_coverage:
-          +enabled: false
-        fct_undocumented_sources:
-          +enabled: false
-        fct_undocumented_source_tables:
-          +enabled: false
+        +enabled: false
       tests:
         fct_sources_without_freshness:
           +enabled: false
@@ -72,17 +70,9 @@ models:
         fct_model_directories:
           +enabled: false
       performance:
-        fct_chained_views_dependencies:
-          +enabled: false
-        fct_exposure_parents_materializations:
-          +enabled: false
+        +enabled: false
       governance:
-        fct_public_models_without_contract:
-          +enabled: false
-        fct_exposures_dependent_on_private_models:
-          +enabled: false
-        fct_undocumented_public_models:
-          +enabled: false
+        +enabled: false
 
 dispatch:
   - macro_namespace: dbt

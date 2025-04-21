@@ -51,7 +51,7 @@ jobs:
         run: dbt deps
       - name: Run dbt-project-evaluator
         run: |
-          dbt build --select package:dbt_project_evaluator
+          dbt build --select package:dbt_project_evaluator dbt_project_evaluator_exceptions
   sqlfluff-lint:
     runs-on: ubuntu-latest
     steps:
