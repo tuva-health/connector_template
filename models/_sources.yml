@@ -1,8 +1,8 @@
 version: 2
 
-# sources:
-#   - name: 
-#     database:
-#     schema:
-#     tables:
-#       - name:
+#sources:
+#  - name:
+#    database:
+#    schema:
+#    tables:
+#      - name:

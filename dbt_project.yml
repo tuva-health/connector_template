@@ -30,3 +30,19 @@ snapshot-paths: ["snapshots"]
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
+
+models:
+  connector_template:
+    models:
+      staging:
+        +materialized: table
+        +schema: _input_layer
+        +tags: input_layer
+      intermediate:
+        +materialized: table
+        +schema: _input_layer
+        +tags: input_layer
+      final:
+        +materialized: table
+        +schema: input_layer
+        +tags: input_layer
