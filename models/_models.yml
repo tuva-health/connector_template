@@ -1272,7 +1272,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: practitioner
-    config:
     description: >
       The practitioner table contains information on the providers in the 
       dataset e.g. physicians, physicians assistants, etc.
