@@ -1,6 +1,7 @@
 version: 2
 
 models:
+### final
 # Claims input
   - name: eligibility
     config:
@@ -86,10 +87,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: medical_claim
-    config:
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     tests: 
       - unique:
           column_name: "(claim_id || '-' || claim_line_number)"
@@ -709,11 +706,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: pharmacy_claim
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The pharmacy_claim table includes information about retail and specialty 
       drug prescriptions that have been filled by a patient, billed by a 
@@ -822,11 +814,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: provider_attribution
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The provider_attribution table assigns a provider to each patient-member_month
       of eligibility. The user may assign both a payer attributed provider (as
@@ -872,11 +859,6 @@ models:
 
 # Clinical input
   - name: condition
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The condition table contains information related to medical conditions 
       patients have, including problems, admitting diagnosis codes, and billable 
@@ -944,11 +926,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: encounter
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The encounter table contains information about patients visits (i.e. 
       encounters).  This includes acute inpatient, emergency department, office 
@@ -1034,11 +1011,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: lab_result
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The lab result table contains information about lab test results, 
       including the LOINC code and description, units, reference range, and 
@@ -1128,11 +1100,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: location
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The location table contains information on practice and facility locations 
       where patients receive medical care.
@@ -1173,10 +1140,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: medication
-    config:
-
-      schema: input_layer
-      tags: input_layer
     description: >
       The medication table contains information on medications ordered and/or 
       administered during a patient encounter.
@@ -1242,11 +1205,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: observation
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The observation table contains information on measurements other than lab 
       tests e.g. blood pressure, height, and weight.
@@ -1304,11 +1262,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: patient
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The patient table contains demographic and geographic information on 
       patients.
@@ -1365,11 +1318,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: practitioner
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The practitioner table contains information on the providers in the 
       dataset e.g. physicians, physicians assistants, etc.
@@ -1402,11 +1350,6 @@ models:
         description: '{{ doc("ingest_datetime") }}'
 
   - name: procedure
-    config:
-
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: >
       The procedure table contains information on procedures that were performed 
       on patients in the dataset.
@@ -1479,3 +1422,7 @@ models:
         description: '{{ doc("file_name") }}'
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
+
+### intermediate
+
+### staging
