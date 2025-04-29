@@ -1,0 +1,17 @@
+target/
+dbt_packages/
+package-lock.yml
+logs/
+
+.idea/
+.vscode/
+
+.DS_Store
+
+.mise.toml
+.venv/
+__pycache__/
+.envrc
+.python-version
+venv/
+macros/
