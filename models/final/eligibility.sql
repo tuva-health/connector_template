@@ -4,11 +4,11 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as subscriber_id
     , cast(null as {{ dbt.type_string() }}) as gender
     , cast(null as {{ dbt.type_string() }}) as race
-    , cast(null as {{ dbt.type_string() }}) as birth_date
-    , cast(null as {{ dbt.type_string() }}) as death_date
-    , cast(null as {{ dbt.type_string() }}) as death_flag
-    , cast(null as {{ dbt.type_string() }}) as enrollment_start_date
-    , cast(null as {{ dbt.type_string() }}) as enrollment_end_date
+    , cast(null as date) as birth_date
+    , cast(null as date) as death_date
+    , cast(null as {{ dbt.type_int() }}) as death_flag
+    , cast(null as date) as enrollment_start_date
+    , cast(null as date) as enrollment_end_date
     , cast(null as {{ dbt.type_string() }}) as payer
     , cast(null as {{ dbt.type_string() }}) as payer_type
     , cast(null as {{ dbt.type_string() }}) as plan
@@ -28,6 +28,6 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as phone
     , cast(null as {{ dbt.type_string() }}) as data_source
     , cast(null as {{ dbt.type_string() }}) as file_name
-    , cast(null as {{ dbt.type_string() }}) as file_date
-    , cast(null as {{ dbt.type_string() }}) as ingest_datetime
+    , cast(null as date) as file_date
+    , cast(null as {{ dbt.type_timestamp() }}) as ingest_datetime
 {% if target.type == 'fabric' %} {% else %} limit 0 {% endif %}
