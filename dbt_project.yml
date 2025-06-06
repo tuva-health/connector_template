@@ -1,8 +1,8 @@
-name: 'connector_template'
+name: connector_template
 version: '1.0.0'
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'default'
+profile: default
 
 vars:
   exclude_packages: ["all"]
@@ -39,19 +39,18 @@ seeds:
 
 models:
   connector_template:
-    models:
-      staging:
-        +materialized: table
-        +schema: _input_layer
-        +tags: input_layer
-      intermediate:
-        +materialized: table
-        +schema: _input_layer
-        +tags: input_layer
-      final:
-        +materialized: table
-        +schema: input_layer
-        +tags: input_layer
+    staging:
+      +materialized: table
+      +schema: _input_layer
+      +tags: input_layer
+    intermediate:
+      +materialized: table
+      +schema: _input_layer
+      +tags: input_layer
+    final:
+      +materialized: table
+      +schema: input_layer
+      +tags: input_layer
   dbt_project_evaluator:
     marts:
       dag:

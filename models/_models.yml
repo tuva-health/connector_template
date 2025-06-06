@@ -4,10 +4,6 @@ models:
 ### final
 # Claims input
   - name: eligibility
-    config:
-      schema: input_layer
-      tags: input_layer
-      materialized: table
     description: > 
       The eligibility table includes information about a patient's health 
       insurance coverage and demographics (note: we use the word patient as a 
