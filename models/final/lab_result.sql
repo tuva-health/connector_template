@@ -19,28 +19,28 @@ with unfiltered_data as (
            ordering_practitioner_id,
            ingest_datetime,
            file_name,
-           row_number() OVER(PARTITION BY condition_id ORDER BY file_name desc) as row_number
+           row_number() OVER(PARTITION BY lab_result_id ORDER BY file_name desc) as row_number
     from {{ ref('int_practicefusion_lab_result') }}
 )
 select patient_id,
-    lab_result_id,
-    encounter_id,
-    accession_number,
-    source_code_type,
-    source_code,
-    source_description,
-    source_component,
-    result,
-    source_units,
-    result_date,
-    status,
-    collection_date,
-    source_reference_range_low,
-    source_reference_range_high,
-    source_abnormal_flag,
-    specimen,
-    ordering_practitioner_id,
-    ingest_datetime,
-    file_name
+       lab_result_id,
+       encounter_id,
+       accession_number,
+       source_code_type,
+       source_code,
+       source_description,
+       source_component,
+       result,
+       source_units,
+       result_date,
+       status,
+       collection_date,
+       source_reference_range_low,
+       source_reference_range_high,
+       source_abnormal_flag,
+       specimen,
+       ordering_practitioner_id,
+       ingest_datetime,
+       file_name
 from unfiltered_data
 where row_number = 1
