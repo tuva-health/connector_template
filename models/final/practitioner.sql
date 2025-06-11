@@ -8,7 +8,7 @@ with unfiltered_data as (
        sub_specialty,
        data_source,
        file_name,
-       ingest_datetime
+       ingest_datetime,
        row_number() OVER(PARTITION BY practitioner_id ORDER BY file_name desc) as row_number
 from {{ ref('int_practicefusion_practitioner') }}
 )
@@ -22,4 +22,5 @@ select practitioner_id,
     data_source,
     file_name,
     ingest_datetime
+from unfiltered_data
 where row_number = 1

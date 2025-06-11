@@ -18,7 +18,7 @@ with unfiltered_data as (
        modifier_5,
        practitioner_id,
        data_source,
-       file_name
+       file_name,
        row_number() OVER(PARTITION BY procedure_id ORDER BY file_name desc) as row_number
 from {{ ref('int_practicefusion_procedure') }}
 )
@@ -42,5 +42,6 @@ from {{ ref('int_practicefusion_procedure') }}
        practitioner_id,
        data_source,
        file_name
+from unfiltered_data
 where row_number = 1
 and (source_code is not null or source_description is not null)

@@ -44,4 +44,5 @@ select person_id,
     data_source,
     file_name,
     ingest_datetime
+from unfiltered_data
 where row_number = 1

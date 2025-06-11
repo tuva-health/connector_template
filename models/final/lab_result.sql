@@ -19,7 +19,7 @@ with unfiltered_data as (
            practitioner_id,
            practitioner_npi,
            ingest_datetime,
-           file_name
+           file_name,
            row_number() OVER(PARTITION BY condition_id ORDER BY file_name desc) as row_number
     from {{ ref('int_practicefusion_lab_result') }}
 )
@@ -44,4 +44,5 @@ select patient_id,
     practitioner_npi,
     ingest_datetime,
     file_name
+from unfiltered_data
 where row_number = 1
