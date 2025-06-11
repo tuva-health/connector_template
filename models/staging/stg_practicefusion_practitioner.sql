@@ -8,4 +8,4 @@ select
     , subspecialty
     , _run_time
     , _file_name
-from {{ source('practicefusion_raw', 'practitioner') }}
+from {{ source('practicefusion_raw', 'practitioner_raw') }}

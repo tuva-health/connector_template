@@ -10,4 +10,4 @@ select
     cast(_file_name as {{ dbt.type_string() }}) as filename,
     _run_time as ingest_datetime
 
-    FROM {{ ref('stg_practicefusion_provider') }}
+    FROM {{ ref('stg_practicefusion_practitioner') }}
