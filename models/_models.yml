@@ -2,7 +2,7 @@ version: 2
 
 models:
 ### final
-  - name: input_layer_condition
+  - name: condition
     description: >
       The condition table contains information related to medical conditions 
       patients have, including problems, admitting diagnosis codes, and billable 
@@ -72,7 +72,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_encounter
+  - name: encounter
     description: >
       The encounter table contains information about patients visits (i.e. 
       encounters).  This includes acute inpatient, emergency department, office 
@@ -160,7 +160,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_lab_result
+  - name: lab_result
     description: >
       The lab result table contains information about lab test results, 
       including the LOINC code and description, units, reference range, and 
@@ -252,7 +252,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_medication
+  - name: medication
     description: >
       The medication table contains information on medications ordered and/or 
       administered during a patient encounter.
@@ -320,7 +320,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_observation
+  - name: observation
     description: >
       The observation table contains information on measurements other than lab 
       tests e.g. blood pressure, height, and weight.
@@ -380,7 +380,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_patient
+  - name: patient
     description: >
       The patient table contains demographic and geographic information on 
       patients.
@@ -439,7 +439,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_practitioner
+  - name: practitioner
     description: >
       The practitioner table contains information on the providers in the 
       dataset e.g. physicians, physicians assistants, etc.
@@ -474,7 +474,7 @@ models:
       schema: practicefusion
       materialized: table
 
-  - name: input_layer_procedure
+  - name: procedure
     description: >
       The procedure table contains information on procedures that were performed 
       on patients in the dataset.
