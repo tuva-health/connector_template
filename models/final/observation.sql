@@ -1,1 +1,55 @@
-select * from {{ ref('int_practicefusion_observation') }}
+with unfiltered_data as (
+    select observation_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       panel_id,
+       observation_date,
+       observation_type,
+       source_code_type,
+       source_code,
+       source_description,
+       normalized_code_type,
+       normalized_code,
+       normalized_description,
+       result,
+       source_units,
+       normalized_units,
+       source_reference_range_low,
+       source_reference_range_high,
+       normalized_reference_range_low,
+       normalized_reference_range_high,
+       data_source,
+       file_name,
+       ingest_datetime,
+       row_number() OVER(PARTITION BY observation_id ORDER BY file_name desc) as row_number
+    from {{ ref('int_practicefusion_observation') }}
+)
+select observation_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       panel_id,
+       observation_date,
+       observation_type,
+       source_code_type,
+       source_code,
+       source_description,
+       normalized_code_type,
+       normalized_code,
+       normalized_description,
+       result,
+       source_units,
+       normalized_units,
+       source_reference_range_low,
+       source_reference_range_high,
+       normalized_reference_range_low,
+       normalized_reference_range_high,
+       data_source,
+       file_name,
+       ingest_datetime
+from unfiltered_data
+where row_number = 1
+and result is not null
+and (source_code is not null or source_description is not null)
+    

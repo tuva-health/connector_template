@@ -1,1 +1,46 @@
-select * from {{ ref('int_practicefusion_procedure') }}
+with unfiltered_data as (
+    select procedure_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       claim_id,
+       procedure_date,
+       source_code_type,
+       source_code,
+       source_description,
+       normalized_code_type,
+       normalized_code,
+       normalized_description,
+       modifier_1,
+       modifier_2,
+       modifier_3,
+       modifier_4,
+       modifier_5,
+       practitioner_id,
+       data_source,
+       file_name
+       row_number() OVER(PARTITION BY procedure_id ORDER BY file_name desc) as row_number
+from {{ ref('int_practicefusion_procedure') }}
+)
+    select procedure_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       claim_id,
+       procedure_date,
+       source_code_type,
+       source_code,
+       source_description,
+       normalized_code_type,
+       normalized_code,
+       normalized_description,
+       modifier_1,
+       modifier_2,
+       modifier_3,
+       modifier_4,
+       modifier_5,
+       practitioner_id,
+       data_source,
+       file_name
+where row_number = 1
+and (source_code is not null or source_description is not null)

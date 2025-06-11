@@ -1,6 +1,6 @@
 
 select 
-	cast(vital_id as {{dbt.type_string()}}) as condition_id,
+	cast(vital_id as {{dbt.type_string()}}) as observation_id,
     cast(null as {{dbt.type_string()}}) as person_id,
 	cast(patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(encounter_id as {{dbt.type_string()}}) as encounter_id,

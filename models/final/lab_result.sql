@@ -1,1 +1,47 @@
-select * from {{ ref('int_practicefusion_lab_result') }}
+with unfiltered_data as (
+    select patient_id,
+           lab_result_id,
+           encounter_id,
+           accession_number,
+           source_code_type,
+           source_code,
+           source_description,
+           source_component,
+           result,
+           result_units,
+           result_date,
+           status,
+           collection_date,
+           reference_range_low,
+           reference_range_high,
+           abnormal_flag,
+           specimen,
+           practitioner_id,
+           practitioner_npi,
+           ingest_datetime,
+           file_name
+           row_number() OVER(PARTITION BY condition_id ORDER BY file_name desc) as row_number
+    from {{ ref('int_practicefusion_lab_result') }}
+)
+select patient_id,
+    lab_result_id,
+    encounter_id,
+    accession_number,
+    source_code_type,
+    source_code,
+    source_description,
+    source_component,
+    result,
+    result_units,
+    result_date,
+    status,
+    collection_date,
+    reference_range_low,
+    reference_range_high,
+    abnormal_flag,
+    specimen,
+    practitioner_id,
+    practitioner_npi,
+    ingest_datetime,
+    file_name
+where row_number = 1

@@ -21,6 +21,6 @@ select
     cast(null as {{ dbt.type_string() }}) as modifier_5,
     cast(practitioner_id as {{ dbt.type_string() }}) as practitioner_id,
     cast('practicefusion' as {{ dbt.type_string() }}) as data_source,
-    cast(_file_name as {{ dbt.type_string() }}) as filename,
+    cast(_file_name as {{ dbt.type_string() }}) as file_name,
     _run_time as ingest_datetime
     from {{ ref('stg_practicefusion_procedure') }}

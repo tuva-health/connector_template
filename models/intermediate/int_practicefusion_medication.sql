@@ -1,6 +1,5 @@
-with all_data as (
 select 
-	cast(coalesce(medication_id, uuid()) as {{dbt.type_string()}}) as medication_id,
+	cast(REGEXP_REPLACE(medication_id, '^#med', '') as {{dbt.type_string()}}) as medication_id,
 	cast(null as {{dbt.type_string()}}) as person_id,
 	cast(patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(encounter_id as {{dbt.type_string()}}) as encounter_id,
@@ -41,32 +40,6 @@ select
     cast('practicefusion' as {{dbt.type_string()}}) as data_source,
     cast(_file_name as {{dbt.type_string()}}) as file_name,
     _run_time as ingest_datetime
-    from {{ ref('stg_practicefusion_medication') }}
-)
--- sometimes the same medication row is ingested more than once, just on different dates, so only pull the most recent one.
-select medication_id,
-       person_id,
-       patient_id,
-       encounter_id,
-       dispensing_date,
-       prescribing_date,
-       source_code_type,
-       source_code,
-       source_description,
-       ndc_code,
-       ndc_description,
-       rxnorm_code,
-       rxnorm_description,
-       atc_code,
-       atc_description,
-       route,
-       strength,
-       quantity,
-       quantity_unit,
-       days_supply,
-       practitioner_id,
-       data_source,
-       file_name,
-       ingest_datetime,
-       row_number() OVER(PARTITION BY medication_id ORDER BY ingest_datetime desc) as row_number
-       from all_data
+from {{ ref('stg_practicefusion_medication') }}
+
+    

@@ -1,1 +1,56 @@
-select * from {{ ref('int_practicefusion_medication') }}
+with unfiltered_data as (
+    select medication_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       dispensing_date,
+       prescribing_date,
+       source_code_type,
+       source_code,
+       source_description,
+       ndc_code,
+       ndc_description,
+       rxnorm_code,
+       rxnorm_description,
+       atc_code,
+       atc_description,
+       route,
+       strength,
+       quantity,
+       quantity_unit,
+       days_supply,
+       practitioner_id,
+       data_source,
+       file_name,
+       ingest_datetime,
+       row_number() OVER(PARTITION BY medication_id ORDER BY file_name desc) as row_number
+    from {{ ref('int_practicefusion_medication') }}
+)
+-- sometimes the same medication row is ingested more than once, just on different dates, so only pull the most recent one.
+select medication_id,
+       person_id,
+       patient_id,
+       encounter_id,
+       dispensing_date,
+       prescribing_date,
+       source_code_type,
+       source_code,
+       source_description,
+       ndc_code,
+       ndc_description,
+       rxnorm_code,
+       rxnorm_description,
+       atc_code,
+       atc_description,
+       route,
+       strength,
+       quantity,
+       quantity_unit,
+       days_supply,
+       practitioner_id,
+       data_source,
+       file_name,
+       ingest_datetime
+from unfiltered_data
+where row_number = 1
+and (source_code is not null or source_description is not null)

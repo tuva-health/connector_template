@@ -25,7 +25,7 @@ SELECT
     CAST(encounter.discharge_disposition_code AS {{ dbt.type_string() }}) AS discharge_disposition_code,
     CAST(encounter.discharge_disposition_description AS {{ dbt.type_string() }}) AS discharge_disposition_description,
     CAST(encounter.attending_practitioner_id AS {{ dbt.type_string() }}) AS attending_provider_id,
-    CAST(encounter.attending_practitioner_npi AS {{ dbt.type_string() }}) AS attending_provider_name,
+    CAST(encounter.attending_practitioner_name AS {{ dbt.type_string() }}) AS attending_provider_name,
     CAST(encounter.facility_id AS {{ dbt.type_string() }}) AS facility_id,
     CAST(encounter.facility_name AS {{ dbt.type_string() }}) AS facility_name,
     CAST(encounter.primary_diagnosis_code AS {{ dbt.type_string() }}) AS primary_diagnosis_code_type,
