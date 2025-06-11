@@ -4,7 +4,7 @@ select
 	cast(null as {{dbt.type_string()}}) as person_id,
 	cast(patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(encounter_id as {{dbt.type_string()}}) as encounter_id,
-	cast(null as {{ dbt.type_string }}) as dispensing_date,
+	cast(null as {{ dbt.type_string()}}) as dispensing_date,
     case
       when trim(substring(start_date, 1, 8)) not like '%-%' 
 		    and trim(substring(start_date, 1, 8)) not like '%/%' 

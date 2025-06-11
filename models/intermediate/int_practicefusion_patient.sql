@@ -15,7 +15,7 @@ select
     END as death_date,
     cast(death_flag as {{dbt.type_string()}}) as death_flag,
     cast(social_security_number as {{dbt.type_string()}}) as social_security_number,
-    cast(address_line as {{dbt.type_string()}}) as address,
+    cast(address as {{dbt.type_string()}}) as address,
     cast(initcap(city) as {{dbt.type_string()}}) as city,
     cast(state as {{dbt.type_string()}}) as state,
     cast(zip_code as {{dbt.type_string()}}) as zip_code, 

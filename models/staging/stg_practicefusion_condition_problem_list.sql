@@ -1,9 +1,9 @@
 select
     patient_id
-    , diagnosis_id
-    , diagnosis_name
-    , diagnosis_code
-    , diagnosis_code_system
+    , condition_id
+    , condition_name
+    , condition_code
+    , condition_code_system
     , encounter_id
     , start_date
     , end_date

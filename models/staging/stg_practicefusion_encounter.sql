@@ -1,7 +1,6 @@
 select
     encounter_id
     , patient_id
-    , client_id
     , encounter_type
     , start_date
     , end_date
