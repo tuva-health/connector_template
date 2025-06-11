@@ -6,7 +6,7 @@ select
     , condition_code_system
     , encounter_id
     , start_date
-    , end_date
+    , stop_date
     , recorded_datetime
     , practitioner_npi
     , practitioner_id

@@ -34,7 +34,7 @@ SELECT
     CAST(NULL AS {{ dbt.type_string() }}) AS drg_code_type,
     CAST(NULL AS {{ dbt.type_string() }}) AS drg_code,
     CAST(NULL AS {{ dbt.type_string() }}) AS drg_description,
-    CAST(NULL AS AS NUMERIC) paid_amount,
+    CAST(NULL AS NUMERIC) paid_amount,
     TRY_CAST(null AS NUMERIC) AS allowed_amount,
     TRY_CAST(null AS NUMERIC) AS charge_amount,
     CAST('practicefusion' AS {{ dbt.type_string() }}) AS data_source,

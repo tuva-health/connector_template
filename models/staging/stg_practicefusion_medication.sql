@@ -1,6 +1,7 @@
 select
     patient_id
     , medication_id
+    , encounter_id
     , source_code
     , source_code_type
     , med_display_name

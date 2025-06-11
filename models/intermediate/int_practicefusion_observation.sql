@@ -5,8 +5,8 @@ select
 	cast(patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(encounter_id as {{dbt.type_string()}}) as encounter_id,
     cast(panel_id as {{dbt.type_string()}}) as panel_id,
-    case when trim(substring(service_date, 1, 8)) not like '%-%' and trim(substring(service_date, 1, 8)) not like '%/%' then to_date(trim(substring(service_date, 1, 8)), 'yyyyMMdd')
- 		 else null 
+    case when trim(substring(observation_datetime, 1, 8)) not like '%-%' and trim(substring(observation_datetime, 1, 8)) not like '%/%' then to_date(trim(substring(observation_datetime, 1, 8)), 'yyyyMMdd')
+ 		 else null
     end as observation_date,
     cast(observation_type as {{dbt.type_string()}}) as observation_type,
     cast(source_code_type as {{dbt.type_string()}}) as source_code_type,
