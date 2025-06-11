@@ -19,7 +19,7 @@ select
             else null
         end as {{dbt.type_string()}}) as ndc_code,
 	cast(case
-            when source_code_type = 'ndc' then source_code_description
+            when source_code_type = 'ndc' then med_display_name
             else null
         end as {{dbt.type_string()}}) as ndc_description,
 	cast(case

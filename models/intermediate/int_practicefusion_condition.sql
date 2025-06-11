@@ -4,7 +4,7 @@ select
 	cast(diagnosis.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(diagnosis.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,
-	CASE WHEN LENGTH(TRIM(substring(problem_list.recorded_datetime, 1, 8))) = 8 AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%-%' AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%/%' THEN to_date(substring(problem_list.recorded_datetime, 1, 8), 'yyyyMMdd')
+	CASE WHEN LENGTH(TRIM(substring(diagnosis.recorded_datetime, 1, 8))) = 8 AND TRIM(substring(diagnosis.recorded_datetime, 1, 8)) NOT LIKE '%-%' AND TRIM(substring(diagnosis.recorded_datetime, 1, 8)) NOT LIKE '%/%' THEN to_date(substring(problem_list.recorded_datetime, 1, 8), 'yyyyMMdd')
 		ELSE NULL
     END AS recorded_date,
 	CASE WHEN LENGTH(TRIM(diagnosis.start_date)) = 8 AND TRIM(diagnosis.start_date) NOT LIKE '%-%' AND TRIM(diagnosis.start_date) NOT LIKE '%/%' THEN to_date(TRIM(diagnosis.start_date), 'yyyyMMdd')
@@ -41,7 +41,7 @@ select
 	cast(problem_list.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(problem_list.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,
-	CASE WHEN LENGTH(TRIM(substring(problem_list.recorded_datetime, 1, 8)) = 8 AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%-%' AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%/%' THEN to_date(substring(problem_list.recorded_datetime, 1, 8)), 'yyyyMMdd')
+	CASE WHEN LENGTH(TRIM(substring(problem_list.recorded_datetime, 1, 8))) = 8 AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%-%' AND TRIM(substring(problem_list.recorded_datetime, 1, 8)) NOT LIKE '%/%' THEN to_date(substring(problem_list.recorded_datetime, 1, 8)), 'yyyyMMdd')
  		ELSE NULL
     END AS recorded_date,
 	CASE WHEN LENGTH(TRIM(substring(problem_list.start_date, 1, 8))) = 8 AND TRIM(substring(problem_list.start_date, 1, 8)) NOT LIKE '%-%' AND TRIM(substring(problem_list.start_date, 1, 8)) NOT LIKE '%/%' THEN to_date(TRIM(substring(problem_list.start_date, 1, 8)), 'yyyyMMdd')
