@@ -2,15 +2,20 @@ version: 2
 
 sources:
   - name: practicefusion_raw
-    database: "{% if var('ENV', 'dev') == 'dev' %}dev{% elif var('ENV', 'prod') == 'prod' %}main{% else %}{{ var('ENV') }}{% endif %}"
+    database: practicefusion_dev
     schema: practicefusion
     tables:
-      - name: condition_diagnoses_raw
-      - name: condition_problem_list_raw
-      - name: encounter_raw
-      - name: lab_result_raw
-      - name: medication_raw
-      - name: patient_raw
-      - name: procedure_raw
-      - name: practitioner_raw
-      - name: vitals_raw
+      - name: condition_diagnoses
+      - name: condition_problem_list
+      - name: encounter
+      - name: lab_result
+      - name: medication
+      - name: patient
+      - name: procedure
+      - name: practitioner
+      - name: vitals
+  - name: core
+    database: main
+    schema: core
+    tables:
+      - name: mpi_v0

@@ -1,6 +1,6 @@
 select  
     lab_result.lab_result_id as lab_result_id,
-    cast(null as {{ dbt.type_string() }}) as person_id,
+    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
     lab_result.patient_id as patient_id,
     cast(lab_result.encounter_id as {{ dbt.type_string() }}) as encounter_id,
     lab_result.accession_number as accession_number,
@@ -43,3 +43,5 @@ select
     cast(lab_result._file_name as {{ dbt.type_string() }}) as file_name,
     lab_result._run_time as ingest_datetime
 from {{ ref('stg_practicefusion_lab_result') }} lab_result
+left join {{ ref('stg_patient_mpi_map') }} mpi
+    on lab_result.patient_id = mpi.patient_id

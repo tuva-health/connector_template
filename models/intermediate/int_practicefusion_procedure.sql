@@ -1,6 +1,6 @@
 select 
     coalesce(procedure_id, uuid()) as procedure_id, 
-    cast(null as {{ dbt.type_string() }}) as person_id,
+    cast(coalesce(mpi.mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
     cast(patient_id as {{ dbt.type_string() }}) as patient_id,
     cast(encounter_id as {{ dbt.type_string() }}) as encounter_id,
     cast(null as {{ dbt.type_string() }}) as claim_id,
@@ -23,4 +23,6 @@ select
     cast('practicefusion' as {{ dbt.type_string() }}) as data_source,
     cast(_file_name as {{ dbt.type_string() }}) as file_name,
     _run_time as ingest_datetime
-    from {{ ref('stg_practicefusion_procedure') }}
+    from {{ ref('stg_practicefusion_procedure') }} procedure
+    left join {{ ref('stg_patient_mpi_map') }} mpi
+        on procedure.patient_id = mpi.patient_id

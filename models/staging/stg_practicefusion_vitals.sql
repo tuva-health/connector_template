@@ -15,4 +15,4 @@ select
     , reference_range_high
     , _run_time
     , _file_name
-from {{ source('practicefusion_raw', 'vitals_raw') }}
+from {{ source('practicefusion_raw', 'vitals') }}

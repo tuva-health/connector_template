@@ -12,4 +12,4 @@ select
     , practitioner_id
     , _run_time
     , _file_name
-from {{ source('practicefusion_raw', 'condition_problem_list_raw') }}
+from {{ source('practicefusion_raw', 'condition_problem_list') }}

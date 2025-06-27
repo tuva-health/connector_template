@@ -1,6 +1,6 @@
 select
 	cast(diagnosis.diagnosis_id as {{dbt.type_string()}}) as condition_id,
-    cast(null as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
 	cast(diagnosis.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(diagnosis.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,
@@ -31,13 +31,15 @@ select
     cast('practicefusion' as {{dbt.type_string()}}) as data_source,
     cast(diagnosis._file_name as {{dbt.type_string()}}) AS file_name,
     diagnosis._run_time AS ingest_datetime	 
-from {{ ref('stg_practicefusion_condition_diagnoses') }} diagnosis 
+from {{ ref('stg_practicefusion_condition_diagnoses') }} diagnosis
+left join {{ ref('stg_patient_mpi_map') }} mpi
+    on diagnosis.patient_id = mpi.patient_id
 
 union all
 
 select
 	cast(problem_list.condition_id as {{dbt.type_string()}}) as condition_id,
-    cast(null as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
 	cast(problem_list.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(problem_list.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,
@@ -65,3 +67,5 @@ select
     cast(problem_list._file_name as {{dbt.type_string()}}) AS file_name,
     problem_list._run_time AS ingest_datetime	 
 from {{ ref('stg_practicefusion_condition_problem_list') }} problem_list
+left join {{ ref('stg_patient_mpi_map') }} mpi
+    on problem_list.patient_id = mpi.patient_id

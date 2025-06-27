@@ -1,5 +1,5 @@
 select 
-    cast(null as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
     cast(patient_id as {{dbt.type_string()}}) as patient_id,
     cast(first_name as {{dbt.type_string()}}) as first_name,
     cast(last_name as {{dbt.type_string()}}) as last_name,
@@ -27,4 +27,6 @@ select
     cast(_file_name as {{dbt.type_string()}}) AS file_name,
     _run_time AS ingest_datetime
 
-FROM {{ ref('stg_practicefusion_patient') }}
+FROM {{ ref('stg_practicefusion_patient') }} patient
+left join {{ ref('stg_patient_mpi_map') }} mpi
+    on patient.patient_id = mpi.patient_id

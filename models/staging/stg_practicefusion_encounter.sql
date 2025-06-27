@@ -20,4 +20,4 @@ select
     , primary_diagnosis_description
     , _run_time
     , _file_name
-from {{ source('practicefusion_raw', 'encounter_raw') }}
+from {{ source('practicefusion_raw', 'encounter') }}

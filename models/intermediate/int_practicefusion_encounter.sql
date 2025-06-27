@@ -1,6 +1,6 @@
 SELECT
     CAST(encounter.encounter_id AS {{ dbt.type_string() }}) AS encounter_id,
-    CAST(NULL AS {{ dbt.type_string() }}) AS person_id,
+    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
     CAST(encounter.patient_id AS {{ dbt.type_string() }}) AS patient_id,
     CAST(encounter.encounter_type AS {{ dbt.type_string() }}) AS encounter_type,
     CASE 
@@ -40,4 +40,6 @@ SELECT
     CAST('practicefusion' AS {{ dbt.type_string() }}) AS data_source,
     CAST(_file_name AS {{ dbt.type_string() }}) AS file_name,
     encounter._run_time AS ingest_datetime
-FROM {{ ref('stg_practicefusion_encounter') }} AS encounter
+FROM {{ ref('stg_practicefusion_encounter') }} encounter
+left join {{ ref('stg_patient_mpi_map') }} mpi
+    on encounter.patient_id = mpi.patient_id
