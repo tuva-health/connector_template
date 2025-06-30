@@ -6,6 +6,7 @@ large_file_skip_byte_limit = 100000
 
 [sqlfluff:templater:dbt]
 project_dir = .
+; profiles_dir = . # If you want to change the profiles directory
 
 [sqlfluff:templater:jinja]
 apply_dbt_builtins = True

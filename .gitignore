@@ -25,3 +25,5 @@ release_notes/
 __pycache__/
 .envrc
 .python-version
+*.duckdb
+.user.yml
