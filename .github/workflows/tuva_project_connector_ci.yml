@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Install dbt
-        run: pip install dbt-core dbt-snowflake
+        run: pip install dbt-core dbt-snowflake dbt-duckdb
       - name: Create dbt profiles directory
         run: mkdir -p ~/.dbt
       - name: Create dbt profiles.yml for Snowflake to run package
@@ -70,7 +70,7 @@ jobs:
           python -m pip install --upgrade pip
           # Install dbt adapter needed for compile/lint (using Snowflake here)
           # Also install sqlfluff
-          pip install dbt-core==1.8.6 dbt-snowflake sqlfluff==3.3.1 sqlfluff-templater-dbt
+          pip install dbt-core==1.8.6 dbt-snowflake sqlfluff==3.3.1 sqlfluff-templater-dbt dbt-duckdb==1.9.4
      #### --- Setup dbt Profile for Linting ---
       - name: Create dbt profiles directory
         run: mkdir -p ~/.dbt
