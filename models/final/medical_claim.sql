@@ -66,6 +66,82 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_23
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_24
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_25
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_1
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_2
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_3
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_4
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_5
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_6
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_7
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_8
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_9
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_10
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_11
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_12
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_13
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_14
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_15
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_16
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_17
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_18
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_19
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_20
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_21
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_22
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_23
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_24
+    , cast(null as {{ dbt.type_string() }}) as diagnosis_poa_25
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_type
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_1
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_2
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_3
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_4
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_5
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_6
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_7
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_8
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_9
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_10
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_11
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_12
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_13
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_14
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_15
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_16
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_17
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_18
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_19
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_20
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_21
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_22
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_23
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_24
+    , cast(null as {{ dbt.type_string() }}) as procedure_code_25
+    , cast(null as date) as procedure_date_1
+    , cast(null as date) as procedure_date_2
+    , cast(null as date) as procedure_date_3
+    , cast(null as date) as procedure_date_4
+    , cast(null as date) as procedure_date_5
+    , cast(null as date) as procedure_date_6
+    , cast(null as date) as procedure_date_7
+    , cast(null as date) as procedure_date_8
+    , cast(null as date) as procedure_date_9
+    , cast(null as date) as procedure_date_10
+    , cast(null as date) as procedure_date_11
+    , cast(null as date) as procedure_date_12
+    , cast(null as date) as procedure_date_13
+    , cast(null as date) as procedure_date_14
+    , cast(null as date) as procedure_date_15
+    , cast(null as date) as procedure_date_16
+    , cast(null as date) as procedure_date_17
+    , cast(null as date) as procedure_date_18
+    , cast(null as date) as procedure_date_19
+    , cast(null as date) as procedure_date_20
+    , cast(null as date) as procedure_date_21
+    , cast(null as date) as procedure_date_22
+    , cast(null as date) as procedure_date_23
+    , cast(null as date) as procedure_date_24
+    , cast(null as date) as procedure_date_25    
     , cast(null as {{ dbt.type_int() }}) as in_network_flag
     , cast(null as {{ dbt.type_string() }}) as data_source
     , cast(null as {{ dbt.type_string() }}) as file_name
