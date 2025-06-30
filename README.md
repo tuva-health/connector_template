@@ -28,3 +28,9 @@ dbt build --full-refresh -s tag:input_layer
 - Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+### Running SQLFluff
+1. Create a virtual environment: `python3 -m venv .venv`
+2. Activate the virtual environment: `source .venv/bin/activate`
+3. Install the required packages: `pip install -r requirements.txt`
+4. Run SQLFluff on your target file (e.g. medical claims): `sqlfluff fix models/final/medical_claim.sql`

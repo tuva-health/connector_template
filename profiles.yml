@@ -1,0 +1,7 @@
+# NOTE: Ensure if any passwords or sensitive info is added to use env variables
+default:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'my_database.duckdb'
