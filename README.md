@@ -33,4 +33,5 @@ dbt build --full-refresh -s tag:input_layer
 1. Create a virtual environment: `python3 -m venv .venv`
 2. Activate the virtual environment: `source .venv/bin/activate`
 3. Install the required packages: `pip install -r requirements.txt`
-4. Run SQLFluff on your target file (e.g. medical claims): `sqlfluff fix models/final/medical_claim.sql`
+4. Create a profiles.yml file in `~/.dbt`. The profiles.yml.tmpl file is there as a reference.
+5. Run SQLFluff on your target file (e.g. medical claims): `sqlfluff fix models/final/medical_claim.sql`
