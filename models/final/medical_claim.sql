@@ -141,7 +141,7 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as date) as procedure_date_22
     , cast(null as date) as procedure_date_23
     , cast(null as date) as procedure_date_24
-    , cast(null as date) as procedure_date_25    
+    , cast(null as date) as procedure_date_25
     , cast(null as {{ dbt.type_int() }}) as in_network_flag
     , cast(null as {{ dbt.type_string() }}) as data_source
     , cast(null as {{ dbt.type_string() }}) as file_name
