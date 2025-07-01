@@ -1,5 +1,6 @@
 with unfiltered_data as (
     select patient_id,
+           person_id,
            lab_result_id,
            encounter_id,
            accession_number,
