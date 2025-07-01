@@ -32,13 +32,13 @@ models:
   practicefusion_connector:
     staging:
       +materialized: table
-      +schema: practicefusion
+      +schema: stg_practicefusion
       +tags: staging
     intermediate:
       +materialized: table
-      +schema: practicefusion
+      +schema: int_practicefusion
       +tags: intermediate
     final:
       +materialized: table
-      +schema: practicefusion
+      +schema: input_layer
       +tags: input_layer
