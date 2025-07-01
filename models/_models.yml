@@ -69,7 +69,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: encounter
@@ -157,7 +157,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: lab_result
@@ -249,7 +249,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: medication
@@ -317,7 +317,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: observation
@@ -436,7 +436,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: practitioner
@@ -471,7 +471,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: procedure
@@ -548,7 +548,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
 ### intermediate
