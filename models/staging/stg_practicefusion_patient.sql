@@ -16,4 +16,4 @@ select
     , phone_number
     , _run_time
     , _file_name
-from {{ source('practicefusion_raw', 'patient') }}
+from {{ source('practicefusion_raw', 'patient_raw') }}
