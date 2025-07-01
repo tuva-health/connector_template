@@ -1,5 +1,5 @@
 select 
-	cast(REGEXP_REPLACE(medication,medication_id, '^#med', '') as {{dbt.type_string()}}) as medication_id,
+	cast(REGEXP_REPLACE(medication.medication_id, '^#med', '') as {{dbt.type_string()}}) as medication_id,
     cast(coalesce(mpi.mpi_id, concat('practicefusion_', medication.patient_id)) as {{dbt.type_string()}}) as person_id,
 	cast(medication.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(medication.encounter_id as {{dbt.type_string()}}) as encounter_id,
