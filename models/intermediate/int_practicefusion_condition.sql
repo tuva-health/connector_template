@@ -1,6 +1,6 @@
 select
 	cast(diagnosis.diagnosis_id as {{dbt.type_string()}}) as condition_id,
-    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi.mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
 	cast(diagnosis.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(diagnosis.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,
@@ -39,7 +39,7 @@ union all
 
 select
 	cast(problem_list.condition_id as {{dbt.type_string()}}) as condition_id,
-    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi.mpi_id, concat('practicefusion_', problem_list.patient_id)) as {{dbt.type_string()}}) as person_id,
 	cast(problem_list.patient_id as {{dbt.type_string()}}) as patient_id,
 	cast(problem_list.encounter_id as {{dbt.type_string()}}) as encounter_id,
 	cast(null as {{dbt.type_string()}}) as claim_id,

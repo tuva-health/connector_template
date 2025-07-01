@@ -1,6 +1,6 @@
 SELECT
     CAST(encounter.encounter_id AS {{ dbt.type_string() }}) AS encounter_id,
-    cast(coalesce(mpi_id, concat('practicefusion_', diagnosis.patient_id)) as {{dbt.type_string()}}) as person_id,
+    cast(coalesce(mpi.mpi_id, concat('practicefusion_', encounter.patient_id)) as {{dbt.type_string()}}) as person_id,
     CAST(encounter.patient_id AS {{ dbt.type_string() }}) AS patient_id,
     CAST(encounter.encounter_type AS {{ dbt.type_string() }}) AS encounter_type,
     CASE 
@@ -38,7 +38,7 @@ SELECT
     TRY_CAST(null AS NUMERIC) AS allowed_amount,
     TRY_CAST(null AS NUMERIC) AS charge_amount,
     CAST('practicefusion' AS {{ dbt.type_string() }}) AS data_source,
-    CAST(_file_name AS {{ dbt.type_string() }}) AS file_name,
+    CAST(encounter._file_name AS {{ dbt.type_string() }}) AS file_name,
     encounter._run_time AS ingest_datetime
 FROM {{ ref('stg_practicefusion_encounter') }} encounter
 left join {{ ref('stg_patient_mpi_map') }} mpi
