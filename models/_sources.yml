@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: practicefusion_raw
-    database: practicefusion_dev
-    schema: practicefusion
+    database: practicefusion_main
+    schema: raw_data
     tables:
       - name: condition_diagnoses
       - name: condition_problem_list

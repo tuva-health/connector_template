@@ -377,7 +377,7 @@ models:
       - name: ingest_datetime
         description: '{{ doc("ingest_datetime") }}'
     config:
-      schema: practicefusion
+      schema: input_layer
       materialized: table
 
   - name: patient
@@ -554,71 +554,71 @@ models:
 ### intermediate
   - name: int_practicefusion_condition
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_encounter
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_lab_result
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_medication
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_observation
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_patient
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_practitioner
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
   - name: int_practicefusion_procedure
     config:
-      schema: practicefusion
+      schema: int_practicefusion
       materialized: table
 
 ### staging
   - name: stg_practicefusion_condition_diagnoses
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_condition_problem_list
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_encounter
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_lab_result
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_medication
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_patient
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_practitioner
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_procedure
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
   - name: stg_practicefusion_vitals
     config:
-      schema: practicefusion
+      schema: stg_practicefusion
       materialized: table
