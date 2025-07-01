@@ -24,6 +24,7 @@ with unfiltered_data as (
     from {{ ref('int_practicefusion_lab_result') }}
 )
 select patient_id,
+       person_id,
        lab_result_id,
        encounter_id,
        accession_number,
