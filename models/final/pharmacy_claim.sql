@@ -9,9 +9,9 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as dispensing_provider_npi
     , cast(null as date) as dispensing_date
     , cast(null as {{ dbt.type_string() }}) as ndc_code
-    , cast(null as {{ dbt.type_string() }}) as quantity
-    , cast(null as {{ dbt.type_string() }}) as days_supply
-    , cast(null as {{ dbt.type_string() }}) as refills
+    , cast(null as {{ dbt.type_int() }}) as quantity
+    , cast(null as {{ dbt.type_int() }}) as days_supply
+    , cast(null as {{ dbt.type_int() }}) as refills
     , cast(null as date) as paid_date
     , cast(null as {{ dbt.type_float() }}) as paid_amount
     , cast(null as {{ dbt.type_float() }}) as allowed_amount
