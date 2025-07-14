@@ -37,7 +37,7 @@ SELECT
     CAST(NULL AS NUMERIC) paid_amount,
     TRY_CAST(null AS NUMERIC) AS allowed_amount,
     TRY_CAST(null AS NUMERIC) AS charge_amount,
-    CAST('practicefusion' AS {{ dbt.type_string() }}) AS data_source,
+    cast(concat('practicefusion - ', encounter.practice_name) as {{dbt.type_string()}}) as data_source,
     CAST(encounter._file_name AS {{ dbt.type_string() }}) AS file_name,
     encounter._run_time AS ingest_datetime
 FROM {{ ref('stg_practicefusion_encounter') }} encounter

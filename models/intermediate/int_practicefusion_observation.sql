@@ -22,7 +22,7 @@ select
     cast(vitals.reference_range_high as {{dbt.type_string()}}) as source_reference_range_high,
     cast(null as {{dbt.type_string()}}) as normalized_reference_range_low,
     cast(null as {{dbt.type_string()}}) as normalized_reference_range_high,
-    'practicefusion' as data_source,
+    cast(concat('practicefusion - ', vitals.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(vitals._file_name as {{dbt.type_string()}}) as file_name,
     cast(vitals._run_time as {{dbt.type_string()}}) as ingest_datetime
 from {{ ref('stg_practicefusion_vitals') }} vitals

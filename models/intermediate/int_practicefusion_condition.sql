@@ -28,7 +28,7 @@ select
 	cast(null as int) as condition_rank,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_code,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_description,
-    cast('practicefusion' as {{dbt.type_string()}}) as data_source,
+    cast(concat('practicefusion -', diagnosis.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(diagnosis._file_name as {{dbt.type_string()}}) AS file_name,
     diagnosis._run_time AS ingest_datetime	 
 from {{ ref('stg_practicefusion_condition_diagnoses') }} diagnosis
@@ -63,7 +63,7 @@ select
 	cast(null as int) as condition_rank,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_code,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_description,
-    cast('practicefusion' as {{dbt.type_string()}}) as data_source,
+    cast(concat('practicefusion - ', problem_list.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(problem_list._file_name as {{dbt.type_string()}}) AS file_name,
     problem_list._run_time AS ingest_datetime	 
 from {{ ref('stg_practicefusion_condition_problem_list') }} problem_list

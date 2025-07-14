@@ -13,4 +13,5 @@ select
     , practitioner_id
     , _run_time
     , _file_name
+    , practice_name
 from {{ source('practicefusion_raw', 'medication_raw') }}

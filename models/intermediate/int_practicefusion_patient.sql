@@ -23,7 +23,7 @@ select
     cast(null as {{dbt.type_string()}}) as latitude,  
     cast(null as {{dbt.type_string()}}) as longitude,
     cast(patient.phone_number as {{dbt.type_string()}}) as phone,
-    cast('practicefusion' as {{dbt.type_string()}}) as data_source,
+    cast(concat('practicefusion - ', patient.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(patient._file_name as {{dbt.type_string()}}) AS file_name,
     patient._run_time AS ingest_datetime
 

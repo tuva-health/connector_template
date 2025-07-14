@@ -6,7 +6,7 @@ select
     cast(practice_affiliation as {{dbt.type_string()}}) as practice_affiliation, 
     cast(specialty as {{dbt.type_string()}}) as specialty, 
     cast(subspecialty as {{dbt.type_string()}}) as sub_specialty, 
-    cast('practicefusion' as {{dbt.type_string()}}) as data_source, 
+    cast(concat('practicefusion - ', practice_name) as {{dbt.type_string()}}) as data_source,
     cast(_file_name as {{ dbt.type_string() }}) as file_name,
     _run_time as ingest_datetime
 

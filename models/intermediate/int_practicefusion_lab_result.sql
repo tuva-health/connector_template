@@ -39,7 +39,7 @@ select
     cast(null as {{ dbt.type_string() }}) as normalized_abnormal_flag,
     cast(null as {{ dbt.type_string() }}) as specimen,
     cast(lab_result.practitioner_id as {{ dbt.type_string() }}) as ordering_practitioner_id,
-    cast('practicefusion' as {{ dbt.type_string() }}) as data_source,
+    cast(concat('practicefusion - ', lab_result.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(lab_result._file_name as {{ dbt.type_string() }}) as file_name,
     lab_result._run_time as ingest_datetime
 from {{ ref('stg_practicefusion_lab_result') }} lab_result

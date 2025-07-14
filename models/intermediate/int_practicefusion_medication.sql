@@ -37,7 +37,7 @@ select
 	cast(null as {{ dbt.type_string() }}) as quantity_unit,
 	cast(null as {{dbt.type_string()}}) as days_supply,
 	cast(medication.practitioner_id as {{dbt.type_string()}}) as practitioner_id,
-    cast('practicefusion' as {{dbt.type_string()}}) as data_source,
+    cast(concat('practicefusion - ', medication.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(medication._file_name as {{dbt.type_string()}}) as file_name,
     medication._run_time as ingest_datetime
 from {{ ref('stg_practicefusion_medication') }} medication

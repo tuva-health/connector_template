@@ -11,4 +11,5 @@ select
     , practitioner_npi
     , _run_time
     , _file_name
+    , practice_name
 from {{ source('practicefusion_raw', 'procedure_raw') }}

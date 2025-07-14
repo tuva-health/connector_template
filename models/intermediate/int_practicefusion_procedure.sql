@@ -20,7 +20,7 @@ select
     cast(null as {{ dbt.type_string() }}) as modifier_4,
     cast(null as {{ dbt.type_string() }}) as modifier_5,
     cast(procedure.practitioner_id as {{ dbt.type_string() }}) as practitioner_id,
-    cast('practicefusion' as {{ dbt.type_string() }}) as data_source,
+    cast(concat('practicefusion - ', procedure.practice_name) as {{dbt.type_string()}}) as data_source,
     cast(procedure._file_name as {{ dbt.type_string() }}) as file_name,
     procedure._run_time as ingest_datetime
     from {{ ref('stg_practicefusion_procedure') }} procedure

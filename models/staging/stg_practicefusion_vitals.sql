@@ -15,4 +15,5 @@ select
     , reference_range_high
     , _run_time
     , _file_name
+    , practice_name
 from {{ source('practicefusion_raw', 'vitals_raw') }}
