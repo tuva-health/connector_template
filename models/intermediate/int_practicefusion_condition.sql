@@ -28,7 +28,7 @@ select
 	cast(null as int) as condition_rank,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_code,
 	cast(null as {{dbt.type_string()}}) as present_on_admit_description,
-    cast('practicefusion') as data_source,
+    cast('practicefusion' as {{dbt.type_string()}}) as data_source,
     cast(diagnosis._file_name as {{dbt.type_string()}}) AS file_name,
     diagnosis._run_time AS ingest_datetime	 
 from {{ ref('stg_practicefusion_condition_diagnoses') }} diagnosis
