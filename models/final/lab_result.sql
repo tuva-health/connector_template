@@ -20,7 +20,7 @@ with unfiltered_data as (
            ordering_practitioner_id,
            ingest_datetime,
            file_name,
-           data_source
+           data_source,
            row_number() OVER(PARTITION BY lab_result_id ORDER BY file_name desc) as row_number
     from {{ ref('int_practicefusion_lab_result') }}
 )
