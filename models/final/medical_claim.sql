@@ -20,7 +20,7 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as drg_code_type
     , cast(null as {{ dbt.type_string() }}) as drg_code
     , cast(null as {{ dbt.type_string() }}) as revenue_center_code
-    , cast(null as {{ dbt.type_string() }}) as service_unit_quantity
+    , cast(null as {{ dbt.type_numeric() }}) as service_unit_quantity
     , cast(null as {{ dbt.type_string() }}) as hcpcs_code
     , cast(null as {{ dbt.type_string() }}) as hcpcs_modifier_1
     , cast(null as {{ dbt.type_string() }}) as hcpcs_modifier_2
@@ -33,13 +33,13 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as billing_tin
     , cast(null as {{ dbt.type_string() }}) as facility_npi
     , cast(null as date) as paid_date
-    , cast(null as {{ dbt.type_float() }}) as paid_amount
-    , cast(null as {{ dbt.type_float() }}) as allowed_amount
-    , cast(null as {{ dbt.type_float() }}) as charge_amount
-    , cast(null as {{ dbt.type_float() }}) as coinsurance_amount
-    , cast(null as {{ dbt.type_float() }}) as copayment_amount
-    , cast(null as {{ dbt.type_float() }}) as deductible_amount
-    , cast(null as {{ dbt.type_float() }}) as total_cost_amount
+    , cast(null as {{ dbt.type_numeric() }}) as paid_amount
+    , cast(null as {{ dbt.type_numeric() }}) as allowed_amount
+    , cast(null as {{ dbt.type_numeric() }}) as charge_amount
+    , cast(null as {{ dbt.type_numeric() }}) as coinsurance_amount
+    , cast(null as {{ dbt.type_numeric() }}) as copayment_amount
+    , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
+    , cast(null as {{ dbt.type_numeric() }}) as total_cost_amount
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_type
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_1
     , cast(null as {{ dbt.type_string() }}) as diagnosis_code_2
