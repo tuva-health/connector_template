@@ -1,3 +1,5 @@
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=1.x&color=orange)
+
 ## Background
 This is a template to create connectors for The Tuva Project on version `0.14.x`. 
 
@@ -24,7 +26,7 @@ This guide assumes:
 
 #### Step 1: Create a Git repository for your connector.
 [Create a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template) based on this template
-and name it appropriately. Let's say you named it `my_connector`
+and name it appropriately. Let's say you named it `my_connector`.
 
 #### Step 2: Clone the Git repo you just created
 [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository) the `my_connector` repository you just created using our template repo. If you used the template, you should have all of the files we ship with the connector template
