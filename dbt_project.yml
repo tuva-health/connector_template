@@ -53,6 +53,11 @@ models:
       +tags: input_layer
   dbt_project_evaluator:
     marts:
+      data_tests:
+        # Disabling since we are not including a _models.yml file
+        # which prevents duplication with the Tuva project      
+        fct_missing_primary_key_tests:
+          +enabled: false    
       dag:
         fct_model_fanout:
           +enabled: false
@@ -68,10 +73,6 @@ models:
           +enabled: false
         fct_too_many_joins:
           +enabled: false
-        # Disabling since we are not including a _models.yml file
-        # which prevents duplication with the Tuva project
-        fct_missing_primary_key_tests:
-          +enabled: false 
       documentation:
         +enabled: false
       tests:
