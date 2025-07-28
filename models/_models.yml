@@ -1,0 +1,105 @@
+# This file is an outline with only the primary keys. 
+# NOTE: Additional tests should not be added to this template. Tests should be added the Tuva project instead.
+
+version: 2
+
+models:
+### final
+# Claims input
+  - name: eligibility
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - person_id
+            - enrollment_start_date
+            - enrollment_end_date
+            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+            - payer
+            - data_source
+
+  - name: medical_claim
+    tests: 
+      - unique:
+          column_name: "(claim_id || '-' || claim_line_number)"
+      - not_null:
+          column_name: "(claim_id || '-' || claim_line_number)"
+
+  - name: pharmacy_claim
+    tests: 
+      - unique:
+          column_name: "(claim_id || '-' || claim_line_number)"
+      - not_null:
+          column_name: "(claim_id || '-' || claim_line_number)"
+
+  - name: provider_attribution
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - person_id
+            - year_month
+            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+            - payer
+            - data_source
+
+# Clinical input
+  - name: condition
+
+  - name: encounter
+    columns:
+      - name: encounter_id
+        tests:
+          - unique
+          - not_null
+
+  - name: lab_result
+    columns:
+      - name: lab_result_id
+        tests:
+          - unique
+          - not_null
+
+  - name: location
+    columns:
+      - name: location_id
+        tests:
+          - unique
+          - not_null
+
+  - name: medication
+    columns:
+      - name: medication_id
+        tests:
+          - unique
+          - not_null
+
+  - name: observation
+    columns:
+      - name: observation_id
+        tests:
+          - unique
+          - not_null
+
+  - name: patient
+    columns:
+      - name: person_id
+        tests:
+          - unique
+          - not_null
+
+  - name: practitioner
+    columns:
+      - name: practitioner_id
+        tests:
+          - unique
+          - not_null
+
+  - name: procedure
+    columns:
+      - name: procedure_id
+        tests:
+          - unique
+          - not_null
+
+### intermediate
+
+### staging
