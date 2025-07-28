@@ -68,6 +68,10 @@ models:
           +enabled: false
         fct_too_many_joins:
           +enabled: false
+        # Disabling since we are not including a _models.yml file
+        # which prevents duplication with the Tuva project
+        fct_missing_primary_key_tests:
+          +enabled: false 
       documentation:
         +enabled: false
       tests:
