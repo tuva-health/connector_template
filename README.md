@@ -143,9 +143,7 @@ And then, to run the whole project, you can run:
 ```console
 dbt build --select the_tuva_project
 ```
-The output from the run above will raise any DQI warnings or errors that signal mapping logic may need an update. Once
-you've made the necessary changes, you may want to re-run the model(s) where you've corrected the mapping, and then
-any associated DQI testing.
+The output from the run above will raise any DQI warnings or errors that signal mapping logic may need an update. Once you've made the necessary changes, you may want to re-run the model(s) where you've corrected the mapping, and then any associated DQI testing.
 
 For example, if you were correcting your mapping in `int_medical_claim` and you wanted to re-run the models and tests corresponding to only that part of the project, you could run:
 ```console
