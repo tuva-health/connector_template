@@ -43,7 +43,13 @@ models:
 
 # Clinical input
   - name: condition
-
+    columns:
+      - name: condition_id
+        description: '{{ doc("condition_id") }}'
+        tests:
+          - unique
+          - not_null
+          
   - name: encounter
     columns:
       - name: encounter_id
