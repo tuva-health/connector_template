@@ -21,17 +21,19 @@ models:
 
   - name: medical_claim
     tests: 
-      - unique:
-          column_name: "(claim_id || '-' || claim_line_number)"
-      - not_null:
-          column_name: "(claim_id || '-' || claim_line_number)"
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - claim_id
+            - claim_line_number
+            - data_source
 
   - name: pharmacy_claim
     tests: 
-      - unique:
-          column_name: "(claim_id || '-' || claim_line_number)"
-      - not_null:
-          column_name: "(claim_id || '-' || claim_line_number)"
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - claim_id
+            - claim_line_number
+            - data_source
 
   - name: provider_attribution
     tests:
