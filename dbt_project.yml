@@ -56,8 +56,8 @@ models:
       data_tests:
         # Disabling since we are not including a _models.yml file
         # which prevents duplication with the Tuva project      
-        fct_missing_primary_key_tests:
-          +enabled: false    
+        # fct_missing_primary_key_tests:
+        +enabled: false    
       dag:
         fct_model_fanout:
           +enabled: false
