@@ -15,9 +15,22 @@ Folding multiple different data sources (and multiple raw data schemas) into a s
 The way we have handled this in the past is by mapping all of our data sources in separate connectors, and then unioning data once it has been mapped to the Tuva Project Input Layer. That allows for source-specific logic to handle the mapping piece, and then the data can be unioned when all sources are aligned with the Tuva Data Model.
 
 ### High-level project structure
-* `staging` layer: `source()` raw data and map it to the Tuva Data Model.
-* `intermediate` layer: handle any consequential transformations, including Adjustments, Denials, and Reversals (ADR) for claims and deduplication.
-* `final` layer: data is ready to run through The Tuva Project—the models in this layer are expected by The Tuva Project Package.
+The typical workflow and project structure for mapping raw data to the Tuva Data Model within a connector is done in 3 stages (found within the models directory): `staging`, `intermediate`, and `final`.
+
+**Staging**
+Model(s) with little transformation.
+* Convert non varchar/string column to the appropriate data types (e.g. dates, numbers)
+* Map source() raw data to the Tuva Data Model
+
+**Intermediate**
+Model(s) that perform major transformation to the source data.
+* Deduplication of Adjustments, Denials, and Reversals (ADR) for claims
+* Any other consequential transformations
+
+**Final**
+Model(s) that are used by the Tuva Project (i.e. the Input Layer).
+* Convert all column to the required data types
+* Models in this layer are expected by The Tuva Project Package Input Layer
 
 ## Getting started building your own connector
 This guide assumes:
@@ -66,7 +79,9 @@ that are not relevant to your use case.
 
 If you are creating a connector for a claims data source, you can delete all models from the `models/final/` directory except for `medical_claim.sql`, `pharmacy_claim.sql`, and `eligibility.sql`.
 
-If you are creatiung a connector for a clinical data source, you can delete `medical_claim.sql`, `pharmacy_claim.sql`, and `eligibility.sql` from `models/final/`.
+If you are creating a connector for a clinical data source, you can delete `medical_claim.sql`, `pharmacy_claim.sql`, and `eligibility.sql` from `models/final/`.
+
+In the [dbt_project.yml](dbt_project.yml) file, you should uncomment `claims_enabled` if you're building a claims connector. Uncomment `clinical_enabled` if you're building a clinical connector. This variable helps tell the Tuva Project what kind of data to expect.
 
 #### Step 5: Add your raw data tables to your project
 The first step in mapping your data is making sure that your dbt project can find your raw data tables that
@@ -79,6 +94,22 @@ In order for `source()` calls to work correctly, you must update your [_sources.
 #### Step 6: Create your staging models
 In the `models/staging/` directory, create your staging models. Typically, these models are very simple
 and only handle light data typing. If you were building a claims connector and had eligibility, medical claims, and pharmacy claims data, you might create three models: `stg_eligibility.sql`, `stg_medical_claim.sql`, and `stg_pharmacy_claim.sql`.
+
+We recommend that the ETL process dumps all of the fields as strings into the data warehouse.
+These columns then can be trimmed and nullified by adding this CTE at the top of your staging models:
+
+```sql
+with base as (
+select
+  {% for column in adapter.get_columns_in_relation(source('<schema>', '<table name>')) %}
+    cast(nullif(trim({{ column.name }}), '') as {{ dbt.type_string() }}) as {{ column.name }}
+    {%- if not loop.last -%},{%- endif %}
+  {% endfor %}
+from {{ source('<schema>', '<table name>') }}
+)
+```
+
+Note that some data sources may represent null values differently, and these different representations should be handled in the `intermediate layer`.
 
 #### Step 7: Intermediate models and the mapping process
 The bulk of mapping happens in the `intermediate` layer. Mapping involves:
@@ -104,7 +135,19 @@ problems, correctable or not.
 
 Tuva's [Data Quality Intelligence](https://thetuvaproject.com/data-quality) (DQI) contains over 600 tests built into the project. As you run your final models, tests may warn, or error, with varying levels of severity. Based on these warnings and errors, you may need to correct your mappings and re-run some (or all) of your project.
 
-If you were correcting your mapping in `int_medical_claim` and you wanted to re-run the models and tests corresponding to only that part of the project, you could run:
+To run the models you've created for your connector, you can run:
+```console
+dbt --select tag:input_layer
+```
+And then, to run the whole project, you can run:
+```console
+dbt build --select the_tuva_project
+```
+The output from the run above will raise any DQI warnings or errors that signal mapping logic may need an update. Once
+you've made the necessary changes, you may want to re-run the model(s) where you've corrected the mapping, and then
+any associated DQI testing.
+
+For example, if you were correcting your mapping in `int_medical_claim` and you wanted to re-run the models and tests corresponding to only that part of the project, you could run:
 ```console
 dbt build --select int_medical_claim medical_claim+1
 ```
