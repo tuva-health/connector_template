@@ -32,11 +32,6 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-seeds:
-  dbt_project_evaluator:
-    dbt_project_evaluator_exceptions:
-      +enabled: false
-
 models:
   connector_template:
     staging:
@@ -51,42 +46,6 @@ models:
       +materialized: table
       +schema: input_layer
       +tags: input_layer
-  dbt_project_evaluator:
-      dag:
-        fct_model_fanout:
-          +enabled: false
-        fct_root_models:
-          +enabled: false
-        fct_direct_join_to_source:
-          +enabled: false
-        fct_marts_or_intermediate_dependent_on_source:
-          +enabled: false
-        fct_multiple_sources_joined:
-          +enabled: false
-        fct_staging_dependent_on_staging:
-          +enabled: false
-        fct_too_many_joins:
-          +enabled: false
-      documentation:
-        +enabled: false
-      tests:
-        fct_sources_without_freshness:
-          +enabled: false
-        fct_test_coverage:
-          +enabled: false
-        fct_missing_primary_key_tests:
-          +enabled: false
-      structure:
-        fct_test_directories:
-          +enabled: false
-        fct_source_directories:
-          +enabled: false
-        fct_model_directories:
-          +enabled: false
-      performance:
-        +enabled: false
-      governance:
-        +enabled: false
 
 data_tests:
   dbt_project_evaluator:
