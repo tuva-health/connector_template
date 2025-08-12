@@ -46,4 +46,3 @@ models:
       +materialized: table
       +schema: input_layer
       +tags: input_layer
-å
