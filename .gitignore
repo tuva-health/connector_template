@@ -22,6 +22,7 @@ release_notes/
 # Environment and dependency management
 .mise.toml
 .venv/
+venv/
 __pycache__/
 .envrc
 .python-version
