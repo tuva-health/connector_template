@@ -46,13 +46,20 @@ models:
             - data_source
 
 # Clinical input
+  - name: appointment
+    columns:
+      - name: appointment_id
+        tests:
+          - unique
+          - not_null
+
   - name: condition
     columns:
       - name: condition_id
         tests:
           - unique
           - not_null
-
+  
   - name: encounter
     columns:
       - name: encounter_id
@@ -60,6 +67,13 @@ models:
           - unique
           - not_null
 
+  - name: immunization
+    columns:
+      - name: immunization_id
+        tests:
+          - unique
+          - not_null
+ 
   - name: lab_result
     columns:
       - name: lab_result_id

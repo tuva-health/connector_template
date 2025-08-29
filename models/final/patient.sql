@@ -1,10 +1,14 @@
 select
       cast(null as {{ dbt.type_string() }}) as person_id
     , cast(null as {{ dbt.type_string() }}) as patient_id
+    , cast(null as {{ dbt.type_string() }}) as name_suffix
     , cast(null as {{ dbt.type_string() }}) as first_name
+    , cast(null as {{ dbt.type_string() }}) as middle_name
     , cast(null as {{ dbt.type_string() }}) as last_name
+    , cast(null as {{ dbt.type_string() }}) as email
     , cast(null as {{ dbt.type_string() }}) as sex
     , cast(null as {{ dbt.type_string() }}) as race
+    , cast(null as {{ dbt.type_string() }}) as ethnicity
     , cast(null as date) as birth_date
     , cast(null as date) as death_date
     , cast(null as {{ dbt.type_int() }}) as death_flag
