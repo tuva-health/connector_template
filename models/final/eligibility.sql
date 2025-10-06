@@ -17,8 +17,12 @@ select {% if target.type == 'fabric' %} top 0 {% else %}{% endif %}
     , cast(null as {{ dbt.type_string() }}) as medicare_status_code
     , cast(null as {{ dbt.type_string() }}) as group_id
     , cast(null as {{ dbt.type_string() }}) as group_name
+    , cast(null as {{ dbt.type_string() }}) as name_suffix
     , cast(null as {{ dbt.type_string() }}) as first_name
+    , cast(null as {{ dbt.type_string() }}) as middle_name
     , cast(null as {{ dbt.type_string() }}) as last_name
+    , cast(null as {{ dbt.type_string() }}) as email
+    , cast(null as {{ dbt.type_string() }}) as ethnicity
     , cast(null as {{ dbt.type_string() }}) as social_security_number
     , cast(null as {{ dbt.type_string() }}) as subscriber_relation
     , cast(null as {{ dbt.type_string() }}) as address
