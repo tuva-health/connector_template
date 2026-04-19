@@ -9,44 +9,58 @@ models:
 ### final
 # Claims input
   - name: eligibility
+    config:
+      tags: [claims, input_layer]
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - person_id
-            - enrollment_start_date
-            - enrollment_end_date
-            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
-            - payer
-            - data_source
+          arguments:
+            combination_of_columns:
+              - person_id
+              - enrollment_start_date
+              - enrollment_end_date
+              - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+              - payer
+              - data_source
 
   - name: medical_claim
-    tests: 
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - claim_id
-            - claim_line_number
-            - data_source
-
-  - name: pharmacy_claim
-    tests: 
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - claim_id
-            - claim_line_number
-            - data_source
-
-  - name: provider_attribution
+    config:
+      tags: [claims, input_layer]
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - person_id
-            - year_month
-            - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
-            - payer
-            - data_source
+          arguments:
+            combination_of_columns:
+              - claim_id
+              - claim_line_number
+              - data_source
+
+  - name: pharmacy_claim
+    config:
+      tags: [claims, input_layer]
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - claim_id
+              - claim_line_number
+              - data_source
+
+  - name: provider_attribution
+    config:
+      tags: [claims, input_layer]
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - person_id
+              - year_month
+              - "{{ '\"plan\"' if (target.type == 'fabric') else 'plan' }}"
+              - payer
+              - data_source
 
 # Clinical input
   - name: appointment
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: appointment_id
         tests:
@@ -54,6 +68,8 @@ models:
           - not_null
 
   - name: condition
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: condition_id
         tests:
@@ -61,6 +77,8 @@ models:
           - not_null
   
   - name: encounter
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: encounter_id
         tests:
@@ -68,6 +86,8 @@ models:
           - not_null
 
   - name: immunization
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: immunization_id
         tests:
@@ -75,6 +95,8 @@ models:
           - not_null
  
   - name: lab_result
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: lab_result_id
         tests:
@@ -82,6 +104,8 @@ models:
           - not_null
 
   - name: location
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: location_id
         tests:
@@ -89,6 +113,8 @@ models:
           - not_null
 
   - name: medication
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: medication_id
         tests:
@@ -96,6 +122,8 @@ models:
           - not_null
 
   - name: observation
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: observation_id
         tests:
@@ -103,6 +131,8 @@ models:
           - not_null
 
   - name: patient
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: person_id
         tests:
@@ -110,6 +140,8 @@ models:
           - not_null
 
   - name: practitioner
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: practitioner_id
         tests:
@@ -117,6 +149,8 @@ models:
           - not_null
 
   - name: procedure
+    config:
+      tags: [clinical, input_layer]
     columns:
       - name: procedure_id
         tests:
@@ -126,3 +160,64 @@ models:
 ### intermediate
 
 ### staging
+# Claims input
+  - name: stg_eligibility
+    config:
+      tags: [claims, input_layer]
+
+  - name: stg_medical_claim
+    config:
+      tags: [claims, input_layer]
+
+  - name: stg_pharmacy_claim
+    config:
+      tags: [claims, input_layer]
+
+  - name: stg_provider_attribution
+    config:
+      tags: [claims, input_layer]
+
+# Clinical input
+  - name: stg_appointment
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_condition
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_encounter
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_immunization
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_lab_result
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_location
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_medication
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_observation
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_patient
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_practitioner
+    config:
+      tags: [clinical, input_layer]
+
+  - name: stg_procedure
+    config:
+      tags: [clinical, input_layer]

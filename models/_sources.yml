@@ -1,8 +1,21 @@
 version: 2
 
-#sources:
-#  - name:
-#    database:
-#    schema:
-#    tables:
-#      - name:
+sources:
+  - name: source_input
+    schema: raw_data
+    tables:
+      - name: appointment
+      - name: condition
+      - name: eligibility
+      - name: encounter
+      - name: immunization
+      - name: lab_result
+      - name: location
+      - name: medical_claim
+      - name: medication
+      - name: observation
+      - name: patient
+      - name: pharmacy_claim
+      - name: practitioner
+      - name: procedure
+      - name: provider_attribution
