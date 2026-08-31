@@ -1,6 +1,7 @@
 name: connector_template
 version: "1.0.0"
 config-version: 2
+require-dbt-version: ">=1.10.5,<3.0.0"
 
 profile: default
 
@@ -10,12 +11,16 @@ flags:
 models:
   connector_template:
     +schema: input_layer
+    +tags: [input_layer]
     final:
       +materialized: table
 
 vars:
-  enable_data_quality: false
   claims_enabled: true
   clinical_enabled: false
   provider_attribution_enabled: false
-  semantic_layer_enabled: false
+  data_quality_enabled: false
+
+  passthrough:
+    prefix: "x_"
+    strip: false
